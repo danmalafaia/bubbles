@@ -34,3 +34,31 @@ class BubblePainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
+
+class Bubbles extends StatefulWidget {
+  const Bubbles({Key key, double radius, Color color})
+      : _radius = radius,
+        _color = color,
+        super(key: key);
+
+  final double _radius;
+
+  final Color _color;
+
+  @override
+  _BubblesState createState() => _BubblesState(_radius, _color);
+}
+
+class _BubblesState extends State<Bubbles> {
+  _BubblesState(this._radius, this._color);
+
+  final double _radius;
+  final Color _color;
+
+  @override
+  Widget build(BuildContext context) => CustomPaint(
+        foregroundPainter: BubblePainter(Bubble(_color, _radius)),
+        size: Size(MediaQuery.of(context).size.width,
+            MediaQuery.of(context).size.height),
+      );
+}
